@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "52e059b2-c1d0-49cd-a949-a1a8afc0b968",
+		"name": "Trello Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "Create board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"boardId\"",
+									"var value = pm.response.json().id",
+									"",
+									"pm.collectionVariables.set (key, value);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{My token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"defaultLists\": false,\n    \"name\": \"{{$randomCompanyName}}\",\n    \"token\": \"{{My token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/boards/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"boards",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a board",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{My token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/boards/{{boardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"boards",
+								"{{boardId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a List on a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"ListId\"",
+									"var value = pm.response.json().id",
+									"",
+									"pm.collectionVariables.set (key, value);",
+									"",
+									"console.log(pm.response.json().name);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{My token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{My token}}\",\n    \"name\": \"{{$randomProductName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/boards/{{boardId}}/lists",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"boards",
+								"{{boardId}}",
+								"lists"
+							]
+						},
+						"description": "Create a new List on a Board."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"CardId\"",
+									"var value = pm.response.json().id",
+									"",
+									"pm.collectionVariables.set (key, value);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{My token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{My token}}\",\n    \"idList\": \"{{ListId}}\",\n    \"name\": \"{{$randomEmail}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards"
+							]
+						},
+						"description": "Create a new card"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Card",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{My token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{My token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cards/{{CardId}}?fields=idList,name",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cards",
+								"{{CardId}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "idList,name"
+								}
+							]
+						},
+						"description": "Get a card by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a board",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{My token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{My token}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/boards/{{boardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"boards",
+								"{{boardId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "My token",
+			"value": "59a13aa686724d220166ce94/BbjUtl1PPxdBZwZKoFel3G55b73QRA8KlCgiwLoNMJpSo0ULesrbTYrmAqGt5bfH",
+			"type": "string"
+		},
+		{
+			"key": "boardId",
+			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://trello.com/1/"
+		},
+		{
+			"key": "ListId",
+			"value": ""
+		},
+		{
+			"key": "CardId",
+			"value": ""
+		}
+	]
+}
