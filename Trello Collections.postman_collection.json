@@ -19,7 +19,10 @@
 									"var value = pm.response.json().id",
 									"",
 									"pm.collectionVariables.set (key, value);",
-									""
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -58,6 +61,20 @@
 				},
 				{
 					"name": "Get a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -93,6 +110,10 @@
 									"pm.collectionVariables.set (key, value);",
 									"",
 									"console.log(pm.response.json().name);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									""
 								],
 								"type": "text/javascript"
@@ -146,7 +167,12 @@
 									"var key = \"CardId\"",
 									"var value = pm.response.json().id",
 									"",
-									"pm.collectionVariables.set (key, value);"
+									"pm.collectionVariables.set (key, value);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -189,6 +215,20 @@
 				},
 				{
 					"name": "Get a Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -236,6 +276,20 @@
 				},
 				{
 					"name": "Delete a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [
