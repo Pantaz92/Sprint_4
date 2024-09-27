@@ -38,7 +38,7 @@ build/
 .DS_Store
 ../.DS_Store
 
-### ignore files with .doc ###
+### игнорировать все файлы с расширением .doc ###
 *.doc 
 
 ### IntelliJ IDEA ###
