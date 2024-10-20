@@ -10,10 +10,6 @@ import static ru.qascooter.core.BaseUrls.ORDER_PAGE_URL;
 
 public class MakeSuccessOrderTest extends BaseTest {
 
-    public MakeSuccessOrderTest() {
-        super("firefox");
-    }
-
     @Test
     public void makeSuccessOrderForAirport() {
         driver.get(ORDER_PAGE_URL);
